@@ -3,15 +3,36 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0A0B0E; }
-::-webkit-scrollbar-thumb { background: #1E2433; border-radius: 3px; }
+::-webkit-scrollbar-track { background: #FFF8F2; }
+::-webkit-scrollbar-thumb { background: #F0D9CC; border-radius: 3px; }
 
+/* Subtle confetti dot pattern for celebration pages */
+.bg-celebration {
+  background-color: #FFF8F2;
+  background-image:
+    radial-gradient(rgba(79, 172, 254, 0.09) 1.5px, transparent 1.5px),
+    radial-gradient(rgba(250, 112, 154, 0.09) 1.5px, transparent 1.5px);
+  background-size: 28px 28px, 46px 46px;
+  background-position: 0 0, 14px 14px;
+}
+
+/* New bet flash — warm yellow */
 @keyframes betSlideFlash {
-  0%   { opacity: 0; transform: translateY(-6px); background-color: rgba(16, 185, 129, 0.12); }
-  15%  { opacity: 1; transform: translateY(0);    background-color: rgba(16, 185, 129, 0.12); }
-  60%  { background-color: rgba(16, 185, 129, 0.06); }
+  0%   { opacity: 0; transform: translateY(-6px); background-color: rgba(255, 200, 60, 0.2); }
+  15%  { opacity: 1; transform: translateY(0);    background-color: rgba(255, 200, 60, 0.2); }
+  65%  { background-color: rgba(255, 200, 60, 0.06); }
   100% { background-color: transparent; }
 }
 .bet-new {
   animation: betSlideFlash 2.8s ease-out forwards;
+}
+
+/* Success pop-in */
+@keyframes popIn {
+  0%   { transform: scale(0.92); opacity: 0; }
+  60%  { transform: scale(1.03); }
+  100% { transform: scale(1);    opacity: 1; }
+}
+.pop-in {
+  animation: popIn 0.35s ease-out forwards;
 }

@@ -5,6 +5,7 @@ import { formatDistanceToNow } from 'date-fns'
 
 interface Props {
   bets: Bet[]
+  onDelete?: (id: string) => void
 }
 
 function getInitials(name: string): string {
@@ -15,64 +16,67 @@ function getInitials(name: string): string {
     .join('')
 }
 
-export default function BetFeed({ bets }: Props) {
+export default function BetFeed({ bets, onDelete }: Props) {
   if (bets.length === 0) return null
 
   return (
-    <div className="rounded-2xl border border-[#1E2433] bg-[#11141B] p-6">
+    <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-5 sm:p-6">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-sm font-semibold text-[#94A3B8] uppercase tracking-wider">
-          All Bets
-        </h2>
-        <span className="text-xs text-[#475569]">{bets.length} total</span>
+        <h2 className="font-display text-base font-semibold text-gray-600">All Bets</h2>
+        <span className="text-xs text-gray-400 font-semibold bg-gray-50 border border-gray-100 px-2.5 py-1 rounded-full">
+          {bets.length} total
+        </span>
       </div>
 
-      <div className="space-y-1">
+      <div>
         {bets.map((bet, i) => (
           <div
             key={bet.id}
-            className={`flex items-center gap-3 py-3 ${
-              i !== bets.length - 1 ? 'border-b border-[#1a1f2e]' : ''
-            }`}
+            className={`flex items-center gap-3 py-3 ${i !== bets.length - 1 ? 'border-b border-gray-50' : ''}`}
           >
-            {/* Avatar */}
             <div
               className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
-                bet.choice === 'boy'
-                  ? 'bg-blue-500/20 text-blue-400'
-                  : 'bg-pink-500/20 text-pink-400'
+                bet.choice === 'boy' ? 'bg-blue-100 text-blue-600' : 'bg-pink-100 text-pink-600'
               }`}
             >
               {getInitials(bet.name)}
             </div>
 
-            {/* Name + badge */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-sm font-semibold text-white truncate">{bet.name}</span>
+                <span className="text-sm font-bold text-gray-700 truncate">{bet.name}</span>
                 <span
-                  className={`text-xs font-medium px-2 py-0.5 rounded-full flex-shrink-0 ${
+                  className={`text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0 ${
                     bet.choice === 'boy'
-                      ? 'bg-blue-500/15 text-blue-400'
-                      : 'bg-pink-500/15 text-pink-400'
+                      ? 'bg-blue-50 text-blue-500'
+                      : 'bg-pink-50 text-pink-500'
                   }`}
                 >
-                  {bet.choice === 'boy' ? '👦 Boy' : '👧 Girl'}
+                  {bet.choice === 'boy' ? '👦🏽 Boy' : '👧🏽 Girl'}
                 </span>
               </div>
-              <div className="text-xs text-[#475569] mt-0.5">
+              <div className="text-xs text-gray-400 font-medium mt-0.5">
                 {formatDistanceToNow(new Date(bet.created_at), { addSuffix: true })}
               </div>
             </div>
 
-            {/* Amount */}
             <div
               className={`text-sm font-bold flex-shrink-0 tabular-nums ${
-                bet.choice === 'boy' ? 'text-blue-400' : 'text-pink-400'
+                bet.choice === 'boy' ? 'text-blue-500' : 'text-pink-500'
               }`}
             >
               ${Number(bet.amount).toFixed(0)}
             </div>
+
+            {onDelete && (
+              <button
+                onClick={() => onDelete(bet.id)}
+                className="w-7 h-7 rounded-full flex items-center justify-center text-gray-300 hover:bg-red-50 hover:text-red-400 transition-colors flex-shrink-0 text-sm font-bold"
+                title="Delete bet"
+              >
+                ✕
+              </button>
+            )}
           </div>
         ))}
       </div>

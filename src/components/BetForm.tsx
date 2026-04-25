@@ -8,7 +8,7 @@ interface Props {
   onBetPlaced: (bet: Bet) => void
 }
 
-const PRESET_AMOUNTS = [5, 10, 25, 50]
+const PRESET_AMOUNTS = [1, 5, 10, 20, 50]
 
 export default function BetForm({ onBetPlaced }: Props) {
   const [name, setName] = useState('')
@@ -59,16 +59,23 @@ export default function BetForm({ onBetPlaced }: Props) {
 
   if (placed) {
     return (
-      <div className="rounded-2xl border border-[#1E2433] bg-[#11141B] p-8 text-center">
-        <div className="text-5xl mb-3">{placed.choice === 'boy' ? '👦' : '👧'}</div>
-        <div className="text-xl font-bold text-white mb-1">Bet placed!</div>
-        <div className="text-[#94A3B8] text-sm">
-          <span className="font-semibold text-white">{placed.name}</span> bet{' '}
-          <span className={placed.choice === 'boy' ? 'text-blue-400' : 'text-pink-400'}>
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 text-center pop-in">
+        <div
+          className="text-6xl mb-3 inline-block animate-bounce"
+          style={{ animationDuration: '0.8s', animationIterationCount: 3 }}
+        >
+          {placed.choice === 'boy' ? '👦🏽' : '👧🏽'}
+        </div>
+        <div className="font-display text-2xl font-bold text-gray-800 mb-1">
+          Bet placed! 🎉
+        </div>
+        <p className="text-gray-500 text-sm">
+          <span className="font-bold text-gray-700">{placed.name}</span> bet{' '}
+          <span className={`font-bold ${placed.choice === 'boy' ? 'text-blue-500' : 'text-pink-500'}`}>
             ${Number(placed.amount).toFixed(0)} on {placed.choice === 'boy' ? 'Boy' : 'Girl'}
           </span>
-        </div>
-        <div className="text-xs text-[#475569] mt-2">Good luck! 🍀</div>
+        </p>
+        <p className="text-xs text-gray-400 mt-1">Good luck! 🍀</p>
         <button
           onClick={() => {
             setPlaced(null)
@@ -78,7 +85,7 @@ export default function BetForm({ onBetPlaced }: Props) {
             setCustomAmount('')
             setError(null)
           }}
-          className="mt-6 w-full rounded-xl py-3 text-sm font-semibold bg-[#1a1f2e] hover:bg-[#222840] border border-[#1E2433] text-[#94A3B8] hover:text-white transition-colors"
+          className="mt-6 w-full rounded-2xl py-3 text-sm font-bold bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-600 transition-colors"
         >
           Place another bet
         </button>
@@ -87,14 +94,12 @@ export default function BetForm({ onBetPlaced }: Props) {
   }
 
   return (
-    <div className="rounded-2xl border border-[#1E2433] bg-[#11141B] p-6">
-      <h2 className="text-lg font-bold text-white mb-5">Place Your Bet</h2>
-
+    <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Name */}
         <div>
-          <label htmlFor="bet-name" className="block text-sm font-medium text-[#94A3B8] mb-1.5">
-            Your Full Name
+          <label htmlFor="bet-name" className="block text-sm font-bold text-gray-600 mb-1.5">
+            Your Name
           </label>
           <input
             id="bet-name"
@@ -102,49 +107,56 @@ export default function BetForm({ onBetPlaced }: Props) {
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="e.g. Priya Sharma"
-            className="w-full rounded-xl bg-[#1a1f2e] border border-[#1E2433] text-white placeholder-[#475569] px-4 py-3 text-sm focus:outline-none focus:border-[#3B4565] transition-colors"
+            className="w-full rounded-2xl bg-gray-50 border border-gray-100 text-gray-800 placeholder-gray-300 px-4 py-3 text-sm font-medium focus:outline-none focus:border-blue-200 focus:bg-white transition-colors"
           />
         </div>
 
-        {/* Boy / Girl */}
+        {/* Boy / Girl cards */}
         <div>
-          <p className="text-sm font-medium text-[#94A3B8] mb-1.5">Your Prediction</p>
+          <p className="text-sm font-bold text-gray-600 mb-2">Your Prediction</p>
           <div className="grid grid-cols-2 gap-3">
-            {(['boy', 'girl'] as const).map(opt => (
-              <button
-                key={opt}
-                type="button"
-                onClick={() => setChoice(opt)}
-                className={`flex items-center justify-center gap-2.5 rounded-xl py-4 font-semibold text-sm transition-all duration-200 ${
-                  choice === opt
-                    ? opt === 'boy'
-                      ? 'bg-blue-500/20 border-2 border-blue-500 text-blue-300'
-                      : 'bg-pink-500/20 border-2 border-pink-500 text-pink-300'
-                    : 'bg-[#1a1f2e] border-2 border-[#1E2433] text-[#64748B] hover:border-[#2d3748]'
-                }`}
-              >
-                <span className="text-xl">{opt === 'boy' ? '👦' : '👧'}</span>
-                <span>{opt === 'boy' ? 'Boy' : 'Girl'}</span>
-              </button>
-            ))}
+            <button
+              type="button"
+              onClick={() => setChoice('boy')}
+              className={`rounded-3xl py-6 text-center transition-all duration-200 ${
+                choice === 'boy'
+                  ? 'bg-gradient-to-br from-blue-400 to-sky-500 text-white shadow-lg shadow-blue-200 scale-[1.02]'
+                  : 'bg-blue-50 border-2 border-blue-100 text-blue-400 hover:border-blue-200 hover:bg-blue-100/80'
+              }`}
+            >
+              <div className="text-4xl mb-1.5">👦🏽</div>
+              <div className="font-display text-xl font-bold">Boy</div>
+            </button>
+            <button
+              type="button"
+              onClick={() => setChoice('girl')}
+              className={`rounded-3xl py-6 text-center transition-all duration-200 ${
+                choice === 'girl'
+                  ? 'bg-gradient-to-br from-pink-400 to-rose-500 text-white shadow-lg shadow-pink-200 scale-[1.02]'
+                  : 'bg-pink-50 border-2 border-pink-100 text-pink-400 hover:border-pink-200 hover:bg-pink-100/80'
+              }`}
+            >
+              <div className="text-4xl mb-1.5">👧🏽</div>
+              <div className="font-display text-xl font-bold">Girl</div>
+            </button>
           </div>
         </div>
 
         {/* Amount */}
         <div>
-          <label htmlFor="custom-amount" className="block text-sm font-medium text-[#94A3B8] mb-1.5">
-            Bet Amount ($)
-          </label>
-          <div className="flex gap-2 flex-wrap mb-2">
+          <p className="text-sm font-bold text-gray-600 mb-2">Bet Amount ($)</p>
+          <div className="flex gap-2 flex-wrap mb-2.5">
             {PRESET_AMOUNTS.map(amt => (
               <button
                 key={amt}
                 type="button"
                 onClick={() => { setPresetAmount(amt); setCustomAmount('') }}
-                className={`rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                className={`rounded-2xl px-4 py-2 text-sm font-bold transition-all duration-150 ${
                   presetAmount === amt
-                    ? 'bg-blue-500/20 border border-blue-500 text-blue-300'
-                    : 'bg-[#1a1f2e] border border-[#1E2433] text-[#64748B] hover:border-[#2d3748]'
+                    ? choice === 'girl'
+                      ? 'bg-gradient-to-br from-pink-400 to-rose-500 text-white shadow-md shadow-pink-200'
+                      : 'bg-gradient-to-br from-blue-400 to-sky-500 text-white shadow-md shadow-blue-200'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
                 ${amt}
@@ -159,12 +171,12 @@ export default function BetForm({ onBetPlaced }: Props) {
             placeholder="Or enter a custom amount…"
             min="1"
             step="1"
-            className="w-full rounded-xl bg-[#1a1f2e] border border-[#1E2433] text-white placeholder-[#475569] px-4 py-3 text-sm focus:outline-none focus:border-[#3B4565] transition-colors"
+            className="w-full rounded-2xl bg-gray-50 border border-gray-100 text-gray-800 placeholder-gray-300 px-4 py-3 text-sm font-medium focus:outline-none focus:border-blue-200 focus:bg-white transition-colors"
           />
         </div>
 
         {error && (
-          <p className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-lg px-4 py-2.5">
+          <p className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-2xl px-4 py-3 font-medium">
             {error}
           </p>
         )}
@@ -172,19 +184,17 @@ export default function BetForm({ onBetPlaced }: Props) {
         <button
           type="submit"
           disabled={!canSubmit || loading}
-          className={`w-full rounded-xl py-3.5 font-semibold text-sm transition-all duration-200 ${
+          className={`w-full rounded-2xl py-4 font-display font-bold text-base transition-all duration-200 ${
             !canSubmit || loading
-              ? 'bg-[#1a1f2e] text-[#475569] cursor-not-allowed'
-              : choice === 'boy'
-                ? 'bg-blue-500 hover:bg-blue-400 text-white shadow-lg shadow-blue-500/20'
-                : choice === 'girl'
-                  ? 'bg-pink-500 hover:bg-pink-400 text-white shadow-lg shadow-pink-500/20'
-                  : 'bg-[#1a1f2e] text-[#475569] cursor-not-allowed'
+              ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
+              : choice === 'girl'
+                ? 'bg-gradient-to-r from-pink-400 to-rose-500 text-white shadow-lg shadow-pink-200 hover:shadow-xl hover:scale-[1.01] active:scale-[0.99]'
+                : 'bg-gradient-to-r from-blue-400 to-sky-500 text-white shadow-lg shadow-blue-200 hover:shadow-xl hover:scale-[1.01] active:scale-[0.99]'
           }`}
         >
           {loading
             ? 'Placing bet…'
-            : `Place Bet${effectiveAmount && effectiveAmount > 0 ? ` — $${effectiveAmount}` : ''}`}
+            : `Place Bet${effectiveAmount && effectiveAmount > 0 ? ` — $${effectiveAmount}` : ''} ✨`}
         </button>
       </form>
     </div>

@@ -22,3 +22,6 @@ create policy "Anyone can read bets"
 
 create policy "Anyone can insert bets"
   on public.bets for insert to anon with check (true);
+
+create policy "Anyone can delete bets"
+  on public.bets for delete to anon using (true);

@@ -16,89 +16,74 @@ function fmt(n: number) {
 }
 
 export default function MarketHeader({ stats, loading }: Props) {
-  const { boyPct, girlPct, boyVolume, girlVolume, totalVolume, boyCount, girlCount, totalBets } =
-    stats
+  const { boyPct, girlPct, boyVolume, girlVolume, totalVolume, boyCount, girlCount, totalBets } = stats
 
   return (
-    <div className="rounded-2xl border border-[#1E2433] bg-[#11141B] p-6">
-      {/* Top bar */}
-      <div className="flex items-center justify-between mb-2">
-        <p className="text-sm text-[#64748B]">🍼 Baby Gender Market</p>
-        <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-400">
-          <span className="relative flex h-2 w-2">
+    <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-5">
+      <div className="flex items-center justify-between mb-4">
+        <span className="font-display text-base font-semibold text-gray-600">Current Odds</span>
+        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+          <span className="relative flex h-1.5 w-1.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
           </span>
           LIVE
-        </div>
+        </span>
       </div>
 
-      <h1 className="text-2xl font-bold text-white mb-6">
-        Will it be a <span className="text-blue-400">Boy</span> or{' '}
-        <span className="text-pink-400">Girl</span>?
-      </h1>
-
       {loading ? (
-        <div className="animate-pulse space-y-4">
-          <div className="h-10 bg-[#1E2433] rounded-xl" />
-          <div className="h-3 bg-[#1E2433] rounded-full" />
+        <div className="animate-pulse space-y-3">
+          <div className="h-16 bg-gray-50 rounded-2xl" />
+          <div className="h-2.5 bg-gray-50 rounded-full" />
         </div>
       ) : (
         <>
-          {/* Probability numbers */}
-          <div className="flex items-end justify-between mb-4">
-            <div>
-              <div className="text-4xl font-black text-blue-400 leading-none tabular-nums">
+          <div className="grid grid-cols-3 gap-3 mb-3">
+            <div className="bg-blue-50 rounded-2xl p-3 text-center">
+              <div className="font-display text-2xl font-bold text-blue-500 tabular-nums leading-none">
                 {boyPct.toFixed(1)}%
               </div>
-              <div className="flex items-center gap-1.5 mt-1.5">
-                <span className="text-xl">👦</span>
-                <div>
-                  <div className="text-sm font-semibold text-white">Boy</div>
-                  <div className="text-xs text-[#64748B]">
-                    {fmt(boyVolume)} &middot; {boyCount} bet{boyCount !== 1 ? 's' : ''}
-                  </div>
-                </div>
+              <div className="flex items-center justify-center gap-1 mt-1.5">
+                <span className="text-base">👦🏽</span>
+                <span className="text-xs font-bold text-blue-600">Boy</span>
+              </div>
+              <div className="text-xs text-blue-400 mt-0.5 tabular-nums">
+                {fmt(boyVolume)} · {boyCount} bets
               </div>
             </div>
 
-            <div className="text-center">
-              <div className="text-xs text-[#64748B] uppercase tracking-wider mb-0.5">
-                Total Volume
+            <div className="flex flex-col items-center justify-center text-center">
+              <div className="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">
+                Total
               </div>
-              <div className="text-2xl font-bold text-white tabular-nums">{fmt(totalVolume)}</div>
-              <div className="text-xs text-[#64748B] mt-0.5">
-                {totalBets} bet{totalBets !== 1 ? 's' : ''} placed
+              <div className="font-display text-xl font-bold text-gray-700 tabular-nums">
+                {fmt(totalVolume)}
+              </div>
+              <div className="text-xs text-gray-400 mt-0.5">
+                {totalBets} bet{totalBets !== 1 ? 's' : ''}
               </div>
             </div>
 
-            <div className="text-right">
-              <div className="text-4xl font-black text-pink-400 leading-none tabular-nums">
+            <div className="bg-pink-50 rounded-2xl p-3 text-center">
+              <div className="font-display text-2xl font-bold text-pink-500 tabular-nums leading-none">
                 {girlPct.toFixed(1)}%
               </div>
-              <div className="flex items-center gap-1.5 mt-1.5 justify-end">
-                <div className="text-right">
-                  <div className="text-sm font-semibold text-white">Girl</div>
-                  <div className="text-xs text-[#64748B]">
-                    {fmt(girlVolume)} &middot; {girlCount} bet{girlCount !== 1 ? 's' : ''}
-                  </div>
-                </div>
-                <span className="text-xl">👧</span>
+              <div className="flex items-center justify-center gap-1 mt-1.5">
+                <span className="text-base">👧🏽</span>
+                <span className="text-xs font-bold text-pink-600">Girl</span>
+              </div>
+              <div className="text-xs text-pink-400 mt-0.5 tabular-nums">
+                {fmt(girlVolume)} · {girlCount} bets
               </div>
             </div>
           </div>
 
-          {/* Probability bar */}
-          <div className="h-3 rounded-full overflow-hidden flex bg-[#0A0B0E]">
+          <div className="h-2.5 rounded-full overflow-hidden flex bg-gray-100">
             <div
-              className="h-full bg-blue-500 transition-all duration-700 ease-out"
+              className="h-full bg-gradient-to-r from-blue-400 to-sky-500 transition-all duration-700 ease-out"
               style={{ width: `${boyPct}%` }}
             />
-            <div className="h-full bg-pink-500 transition-all duration-700 ease-out flex-1" />
-          </div>
-          <div className="flex justify-between mt-1.5 text-xs text-[#475569]">
-            <span>Boy {boyPct.toFixed(0)}%</span>
-            <span>Girl {girlPct.toFixed(0)}%</span>
+            <div className="h-full bg-gradient-to-r from-pink-400 to-rose-500 flex-1 transition-all duration-700 ease-out" />
           </div>
         </>
       )}
