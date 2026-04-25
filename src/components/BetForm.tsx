@@ -5,13 +5,12 @@ import { supabase } from '@/lib/supabase'
 import { Bet } from '@/types'
 
 interface Props {
-  existingNames: string[]
   onBetPlaced: (bet: Bet) => void
 }
 
 const PRESET_AMOUNTS = [5, 10, 25, 50]
 
-export default function BetForm({ existingNames, onBetPlaced }: Props) {
+export default function BetForm({ onBetPlaced }: Props) {
   const [name, setName] = useState('')
   const [choice, setChoice] = useState<'boy' | 'girl' | null>(null)
   const [presetAmount, setPresetAmount] = useState<number | null>(null)
@@ -21,7 +20,6 @@ export default function BetForm({ existingNames, onBetPlaced }: Props) {
   const [placed, setPlaced] = useState<Bet | null>(null)
 
   const nameTrimmed = name.trim()
-  const isNameTaken = nameTrimmed.length > 0 && existingNames.includes(nameTrimmed.toLowerCase())
   const effectiveAmount =
     presetAmount !== null
       ? presetAmount
@@ -32,8 +30,7 @@ export default function BetForm({ existingNames, onBetPlaced }: Props) {
     nameTrimmed.length > 0 &&
     choice !== null &&
     effectiveAmount !== null &&
-    effectiveAmount > 0 &&
-    !isNameTaken
+    effectiveAmount > 0
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -51,11 +48,7 @@ export default function BetForm({ existingNames, onBetPlaced }: Props) {
     setLoading(false)
 
     if (dbError) {
-      setError(
-        dbError.code === '23505'
-          ? `${nameTrimmed} has already placed a bet.`
-          : dbError.message
-      )
+      setError(dbError.message)
       return
     }
 
@@ -111,11 +104,6 @@ export default function BetForm({ existingNames, onBetPlaced }: Props) {
             placeholder="e.g. Priya Sharma"
             className="w-full rounded-xl bg-[#1a1f2e] border border-[#1E2433] text-white placeholder-[#475569] px-4 py-3 text-sm focus:outline-none focus:border-[#3B4565] transition-colors"
           />
-          {isNameTaken && (
-            <p className="text-xs text-amber-400 mt-1.5">
-              ⚠️ {nameTrimmed} has already placed a bet.
-            </p>
-          )}
         </div>
 
         {/* Boy / Girl */}

@@ -50,7 +50,6 @@ export default function Home() {
         <MarketHeader stats={stats} loading={loading} />
         <ProbabilityChart data={chartData} />
         <BetForm
-          existingNames={bets.map(b => b.name.toLowerCase())}
           onBetPlaced={bet =>
             setBets(prev => prev.some(b => b.id === bet.id) ? prev : [...prev, bet])
           }

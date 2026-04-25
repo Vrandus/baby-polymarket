@@ -8,8 +8,8 @@ create table public.bets (
   created_at timestamptz default now() not null
 );
 
--- One bet per person (case-insensitive name match)
-create unique index bets_name_lower_idx on public.bets (lower(name));
+-- If you previously created the unique name index, drop it:
+-- drop index if exists bets_name_lower_idx;
 
 -- Enable realtime for live updates
 alter publication supabase_realtime add table public.bets;
