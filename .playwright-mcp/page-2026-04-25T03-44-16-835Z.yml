@@ -1,0 +1,33 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]: 🍼
+        - generic [ref=e6]: Baby Gender Market
+        - generic [ref=e7]: LIVE
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - heading "Probability Over Time" [level=2] [ref=e17]
+          - generic [ref=e18]:
+            - generic [ref=e19]: Boy
+            - generic [ref=e21]: Girl
+        - img [ref=e26]:
+          - generic [ref=e30]:
+            - generic [ref=e32]: Start
+            - generic [ref=e34]: ...
+          - generic [ref=e36]:
+            - generic [ref=e38]: 0%
+            - generic [ref=e40]: 25%
+            - generic [ref=e42]: 50%
+            - generic [ref=e44]: 75%
+            - generic [ref=e46]: 100%
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - heading "Live Feed" [level=2] [ref=e60]
+          - generic [ref=e61]: 0 bets
+        - generic [ref=e62]:
+          - generic [ref=e63]: 🎲
+          - paragraph [ref=e64]: Waiting for the first bet…
+          - paragraph [ref=e65]: Bets will appear here in real time
+  - alert [ref=e66]
+  - generic [ref=e67]: 0%

@@ -78,7 +78,7 @@ export default function WatchPage() {
         </div>
 
         {/* Big stats card */}
-        <div className="rounded-2xl border border-[#1E2433] bg-[#11141B] p-8">
+        <div className="rounded-2xl border border-[#1E2433] bg-[#11141B] p-4 sm:p-8">
           {loading ? (
             <div className="animate-pulse space-y-5">
               <div className="h-20 bg-[#1E2433] rounded-xl" />
@@ -86,47 +86,54 @@ export default function WatchPage() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-3 gap-2 sm:gap-6">
                 {/* Boy */}
                 <div className="text-center">
-                  <div className="text-6xl font-black text-blue-400 tabular-nums leading-none">
+                  <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-blue-400 tabular-nums leading-none">
                     {stats.boyPct.toFixed(1)}%
                   </div>
-                  <div className="flex items-center justify-center gap-2 mt-3">
-                    <span className="text-3xl">👦</span>
+                  <div className="flex items-center justify-center gap-1 sm:gap-2 mt-2 sm:mt-3">
+                    <span className="text-xl sm:text-3xl">👦</span>
                     <div className="text-left">
-                      <div className="text-base font-bold text-white">Boy</div>
-                      <div className="text-xs text-[#64748B]">
+                      <div className="text-sm sm:text-base font-bold text-white">Boy</div>
+                      <div className="text-xs text-[#64748B] hidden sm:block">
                         {fmt(stats.boyVolume)} &middot; {stats.boyCount} bet{stats.boyCount !== 1 ? 's' : ''}
+                      </div>
+                      <div className="text-xs text-[#64748B] sm:hidden">
+                        {stats.boyCount} bet{stats.boyCount !== 1 ? 's' : ''}
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Volume */}
-                <div className="text-center flex flex-col items-center justify-center border-x border-[#1E2433]">
-                  <div className="text-xs text-[#64748B] uppercase tracking-widest mb-1.5">
-                    Total Volume
+                <div className="text-center flex flex-col items-center justify-center border-x border-[#1E2433] px-1 sm:px-0">
+                  <div className="text-xs text-[#64748B] uppercase tracking-widest mb-1 sm:mb-1.5">
+                    <span className="hidden sm:inline">Total Volume</span>
+                    <span className="sm:hidden">Volume</span>
                   </div>
-                  <div className="text-4xl font-black text-white tabular-nums">
+                  <div className="text-xl sm:text-3xl lg:text-4xl font-black text-white tabular-nums">
                     {fmt(stats.totalVolume)}
                   </div>
-                  <div className="text-sm text-[#64748B] mt-1.5">
-                    {stats.totalBets} bet{stats.totalBets !== 1 ? 's' : ''} placed
+                  <div className="text-xs text-[#64748B] mt-1 sm:mt-1.5">
+                    {stats.totalBets} bet{stats.totalBets !== 1 ? 's' : ''}
                   </div>
                 </div>
 
                 {/* Girl */}
                 <div className="text-center">
-                  <div className="text-6xl font-black text-pink-400 tabular-nums leading-none">
+                  <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-pink-400 tabular-nums leading-none">
                     {stats.girlPct.toFixed(1)}%
                   </div>
-                  <div className="flex items-center justify-center gap-2 mt-3">
-                    <span className="text-3xl">👧</span>
+                  <div className="flex items-center justify-center gap-1 sm:gap-2 mt-2 sm:mt-3">
+                    <span className="text-xl sm:text-3xl">👧</span>
                     <div className="text-left">
-                      <div className="text-base font-bold text-white">Girl</div>
-                      <div className="text-xs text-[#64748B]">
+                      <div className="text-sm sm:text-base font-bold text-white">Girl</div>
+                      <div className="text-xs text-[#64748B] hidden sm:block">
                         {fmt(stats.girlVolume)} &middot; {stats.girlCount} bet{stats.girlCount !== 1 ? 's' : ''}
+                      </div>
+                      <div className="text-xs text-[#64748B] sm:hidden">
+                        {stats.girlCount} bet{stats.girlCount !== 1 ? 's' : ''}
                       </div>
                     </div>
                   </div>
@@ -134,7 +141,7 @@ export default function WatchPage() {
               </div>
 
               {/* Probability bar */}
-              <div className="mt-7 h-4 rounded-full overflow-hidden flex bg-[#0A0B0E]">
+              <div className="mt-4 sm:mt-7 h-3 sm:h-4 rounded-full overflow-hidden flex bg-[#0A0B0E]">
                 <div
                   className="h-full bg-blue-500 transition-all duration-700 ease-out"
                   style={{ width: `${stats.boyPct}%` }}

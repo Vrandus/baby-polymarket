@@ -1,0 +1,19 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: 🍼
+      - generic [ref=e6]: Baby Gender Market
+      - generic [ref=e7]: LIVE
+    - generic [ref=e16]:
+      - heading "Probability Over Time" [level=2] [ref=e17]
+      - generic [ref=e18]:
+        - generic [ref=e19]: Boy
+        - generic [ref=e21]: Girl
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - heading "Live Feed" [level=2] [ref=e28]
+        - generic [ref=e29]: 0 bets
+      - generic [ref=e30]:
+        - generic [ref=e31]: 🎲
+        - paragraph [ref=e32]: Waiting for the first bet…
+        - paragraph [ref=e33]: Bets will appear here in real time
