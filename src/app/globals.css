@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0A0B0E; }
+::-webkit-scrollbar-thumb { background: #1E2433; border-radius: 3px; }
+
+@keyframes betSlideFlash {
+  0%   { opacity: 0; transform: translateY(-6px); background-color: rgba(16, 185, 129, 0.12); }
+  15%  { opacity: 1; transform: translateY(0);    background-color: rgba(16, 185, 129, 0.12); }
+  60%  { background-color: rgba(16, 185, 129, 0.06); }
+  100% { background-color: transparent; }
+}
+.bet-new {
+  animation: betSlideFlash 2.8s ease-out forwards;
+}
